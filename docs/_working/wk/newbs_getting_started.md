@@ -2,7 +2,7 @@
 
 키맵 제작을 위해서는 먼저 몇몇 소프트웨어를 설치하고 개발환경을 갖춰야 합니다. 이 작업은 키보드 수와 관계 없이 한 번만 시행하면 됩니다.
 
-## 1. 전제조건
+## 1. 필수 요구사항
 
 개발에 앞서 필요한 소프트웨어는 다음과 같습니다.
 
@@ -14,36 +14,37 @@
 ?> Linux/Unix의 command line 환경에서 작업해본 적이 없다면, 몇가지 기본적인 개념과 명령어는 알고있어야 합니다.
 QMK 작업을 위해서는 [이 문서](newbs_learn_more_resources.md#command-line-resources) 를 읽어보는 정도로 충분할 것입니디ㅏ.
 
-## 2. 개발환경 준비 :id=set-up-your-environment
+## 2. 개발환경 구성 :id=set-up-your-environment
 
-Linux/Unix 환경만 준비해 놓으면, 나머지는 QMK가 설치하도록 두시면 됩니다.
+Linux/Unix 환경의 경우, QMK가 알아서 설치하도록 두면 됩니다.
 
 <!-- tabs:start -->
 
 ### ** Windows **
 
-QMK maintains a Bundle of MSYS2, the CLI and all necessary dependencies. It also provides a handy `QMK MSYS` terminal shortcut to boot you directly into the correct environment.
+QMK는 MSYS2 번들, CLI 및 모든 의존요소들을 유지보수하며,  올바른 환경에서 바로 부팅하기 편하도록 `QMK MSYS` 터미널 바로가기를 제공합니다.
 
-#### Prerequisites
+#### 준비물
 
-You will need to install [QMK MSYS](https://msys.qmk.fm/). The latest release is available [here](https://github.com/qmk/qmk_distro_msys/releases/latest).
+[QMK MSYS](https://msys.qmk.fm/)를 설치해야 합니다. [이곳에서](https://github.com/qmk/qmk_distro_msys/releases/latest) 최신 버전을 받을 수 있습니다.
 
 <details>
   <summary>Advanced Users</summary>
 
-!> <b style="font-size:150%">This process is not recommended for new users.</b>
+!> <b style="font-size:150%">이 작업은 초보자에게 권장하지 않습니다.</b>
 
-If you'd like to manually install MSYS2, the following sections will walk you through the process.
+MSYS2를 수동으로 설치하고자 한다면 다음 안내를 따라주세요.
 
-#### Prerequisites
+#### 준비물
 
-You will need to install [MSYS2](https://www.msys2.org). Once installed, close any open MSYS terminals (purple icon) and open a new MinGW 64-bit terminal (blue icon) from the Start Menu.
+우선 [MSYS2](https://www.msys2.org)를 설치한 후, 열려있는 MSYS 터미널(보라색 아이콘)들을 모두 닫습니다. 그후 새 MinGW 64-bit 터미널을 시작메뉴에서 실행합니다.
 
-!> **NOTE:** The MinGW 64-bit terminal is *not* the same as the MSYS terminal that opens when installation is completed. Your prompt should say "MINGW64" in purple text, rather than "MSYS". See [this page](https://www.msys2.org/wiki/MSYS2-introduction/#subsystems) for more information on the differences.
+!> **NOTE:** MinGW 64-bit 터미널과 설치시 열리는 MSYS 터미널은 *다릅니다*. 프롬프트에 "MSYS"가 아닌 "MINGW64"가 보라색으로 표시되야 하며, 그외 상세한 차이점은 [이 페이지를](https://www.msys2.org/wiki/MSYS2-introduction/#subsystems) 참고해주세요.
 
-#### Installation
 
-Install the QMK CLI by running:
+#### 설치
+
+다음 명령어로 QMK CLI를 설치합니다:
 
     pacman --needed --noconfirm --disable-download-timeout -S git mingw-w64-x86_64-python-qmk
 
@@ -51,25 +52,25 @@ Install the QMK CLI by running:
 
 ### ** macOS **
 
-QMK maintains a Homebrew tap and formula which will automatically install the CLI and all necessary dependencies.
+QMK는 CLI와 모든 필요한 의존요소를 자동으로 설치하는 Homebrew tap과 formula를 유지보수하고 있습니다.
 
-#### Prerequisites
+#### 준비물
 
-You will need to install Homebrew. Follow the instructions on https://brew.sh.
+Homebrew를 설치해야 합니다. https://brew.sh. 를 따라주세요.
 
-#### Installation
+#### 설치
 
-Install the QMK CLI by running:
+다음 명령어로 QMK CLI를 설치합니다:
 
     brew install qmk/qmk/qmk
 
 ### ** Linux/WSL **
 
-?> **Note for WSL users**: By default, the installation process will clone the QMK repository into your WSL home directory, but if you have cloned manually, ensure that it is located inside the WSL instance instead of the Windows filesystem (ie. not in `/mnt`), as accessing it is currently [extremely slow](https://github.com/microsoft/WSL/issues/4197).
+?> **Note for WSL users**: 기본적으로 설치작업시 QMK repository를 WSL의 home directory로 복사하지만, 만약 수동으로 복사했다면 Windows filesystem이 아닌 WSL 인스턴스에 제대로 위치했는지 확인해주세요. 접근 속도가 [매우 느려질 수 있습니다.](https://github.com/microsoft/WSL/issues/4197)
 
-#### Prerequisites
+#### 준비물
 
-You will need to install Git and Python. It's very likely that you already have both, but if not, one of the following commands should install them:
+Git과 Python을 설치해야 합니다. 둘중 설치되지 않은 것이 있다면 다음 명령어들을 이용해 설치해주세요:
 
 * Debian / Ubuntu / Devuan: `sudo apt install -y git python3-pip`
 * Fedora / Red Hat / CentOS: `sudo yum -y install git python3-pip`
@@ -79,15 +80,15 @@ You will need to install Git and Python. It's very likely that you already have 
 * Sabayon: `sudo equo install dev-vcs/git dev-python/pip`
 * Gentoo: `sudo emerge dev-vcs/git dev-python/pip`
 
-#### Installation
+#### 설치
 
-Install the QMK CLI by running:
+다음 명령어로 QMK CLI를 설치합니다:
 
     python3 -m pip install --user qmk
 
 #### Community Packages
 
-These packages are maintained by community members, so may not be up to date or completely functional. If you encounter problems, please report them to their respective maintainers.
+이 패키지들은 커뮤니티 구성원들에 의해 유지 관리되므로, 최신상태가 아니거나 제대로 작동하지 않을 수 있습니다. 문제 발생시 해당 관리자에게 알려주세요.
 
 On Arch-based distros you can install the CLI from the official repositories (NOTE: at the time of writing this package marks some dependencies as optional that should not be):
 
@@ -99,7 +100,7 @@ You can also try the `qmk-git` package from AUR:
 
 ###  ** FreeBSD **
 
-#### Installation
+#### 설치
 
 Install the FreeBSD package for QMK CLI by running:
 
